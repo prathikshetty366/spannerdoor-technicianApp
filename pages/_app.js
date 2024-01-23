@@ -2,6 +2,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "../app/store";
 import "../public/styles/root.scss";
+import 'react-toastify/dist/ReactToastify.css';
 import Head from "next/head";
 // import Layout from "@/components/Dashboard/Layout";
 export default function App({ Component, pageProps }) {
@@ -9,11 +10,9 @@ export default function App({ Component, pageProps }) {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <Head>
-          <title>SE-Analytics Dashboard</title>
+          <title>Technician tool</title>
         </Head>
-         {/* <Layout> */}
       <Component {...pageProps} />
-    {/* </Layout> */}
       </PersistGate>
     </Provider>
   );

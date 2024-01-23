@@ -1,0 +1,97 @@
+.loginContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .loginWrapper {
+        width: 96%;
+        border-radius: 20px;
+        border: 1px solid #C8C8C8;
+        background: #FFF;
+        height: 550px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 60px;
+
+        .inputForm {
+            width: 50%;
+            margin-left: 101px;
+            display: flex;
+            flex-direction: column;
+
+            .loginheader {
+                color: #000;
+                font-family: 'Inter';
+                font-size: 36px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+                margin-top: 51px;
+            }
+
+            input {
+                width: 525px;
+                color: #ACACAC;
+                font-family: 'Inter';
+                font-size: 20px;
+                font-style: normal;
+                margin-top: 39px;
+                height: 68px;
+                font-weight: 200;
+                line-height: normal;
+                padding-left: 15px;
+                background-color: transparent;
+                outline: none;
+                text-transform: uppercase;
+                border-radius: 20px;
+                border: 1px solid #C5BDBD;
+                background: #FFF;
+                background-color: transparent !important;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: black;
+
+                &::placeholder {
+                    opacity: 0.3;
+                    color: #202121;
+                    font-size: 16px;
+                }
+
+                &:focus {
+                    color: black;
+                    background-color: transparent !important;
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: black;
+                    // Set the text color to white when focused
+                }
+            }
+
+            .buttonWrapper {
+                margin-top: 40px;
+                width: 525px;
+            }
+
+            .loginOptions {
+                width: 525px;
+                display: flex;
+                justify-content: space-between;
+
+                div {
+                    margin-top: 21px;
+                    color: #0A7AE2;
+                    font-family: 'Inter';
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: normal;
+                    cursor: pointer;
+                }
+            }
+        }
+        .inputbg{
+            width: 50%;
+            height: 505px;
+            margin-top: 22px;
+        }
+    }
+}

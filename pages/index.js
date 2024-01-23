@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getTodoList } from "../app/store/todo/actions";
+import Home from "./home";
+import Login from "./login";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -10,7 +12,8 @@ export default function App() {
   }, []);
   return (
     <div className="app">
-      Hello
+    {/* <Home/> */}
+    <Login/>
     </div>
   );
 }
