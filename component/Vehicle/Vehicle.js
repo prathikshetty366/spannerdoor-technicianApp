@@ -84,7 +84,7 @@ function Vehicle({ submitVehicle,selectedVehicleData }) {
             <div className={styles.vehicleInfo}>
                 <div className={styles.header}>
                     <div className={styles.title}>
-                        <div className={styles.numbering}>1</div>
+                        <div className={styles.numbering}>2</div>
                         <div className={styles.tagline}>CHECK VEHICLE DETAILS HISTORY</div>
                     </div>
                     {!needVehicle &&

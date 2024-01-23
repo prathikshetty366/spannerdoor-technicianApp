@@ -19,7 +19,7 @@ export const AppLayout = ({ children, isLoggedIn }) => {
                         alt="Logo"
                         className={styles.logo}
                         style={{ marginLeft: !isLoggedIn ? "0" : "63px" }}
-                        onClick={() => { router.push("/home") }}
+                        onClick={() => { router.push("/dashboard") }}
                     />
                     {isLoggedIn &&
                         <div className={styles.logout} onClick={handleLogout}>LOGOUT</div>

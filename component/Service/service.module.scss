@@ -1,0 +1,94 @@
+.service {
+        width: 100%;
+        border-radius: 20px;
+        border: 1px solid #C8C8C8;
+        background: #FFF;
+        height: auto;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        .header {
+                width: 96%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+
+
+                .title {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        gap: 19px;
+                        margin-top: 30px;
+
+                        .numbering {
+                                width: 47px;
+                                height: 47px;
+                                display: flex;
+                                justify-content: center;
+                                font-family: 'Inter';
+                                align-items: center;
+                                background-color: rgba(255, 184, 0, 0.85);
+                                stroke-width: 2px;
+                                stroke: #A9A6A6;
+                                border-radius: 50%;
+                        }
+
+                        .tagline {
+                                color: #000;
+                                font-family: 'Inter';
+                                font-size: 20px;
+                                font-style: normal;
+                                font-weight: 800;
+                                line-height: normal;
+                        }
+                }
+        }
+
+        .serviceOptions {
+                width: 100%;
+                height: 200px;
+                display: flex;
+                justify-content: center;
+
+                .optionsWrapper {
+                        width: 85%;
+                        display: flex;
+                        align-items: center;
+                        flex-direction: row;
+                        gap: 110px;
+
+                        .option,
+                        .optionSelected {
+                                flex-shrink: 0;
+                                border-radius: 20px;
+                                border: 1px solid #000;
+                                width: 279px;
+                                height: 87px;
+                                color: #000;
+                                font-family: 'Inter';
+                                font-size: 20px;
+                                font-style: normal;
+                                font-weight: 600;
+                                line-height: normal;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                        }
+
+                        .option {
+                                background: rgba(0, 107, 152, 0.00);
+                                cursor: pointer;
+                        }
+
+                        .optionSelected {
+                                background: #074D80;
+                                color: white;
+                        }
+
+
+                }
+        }
+}

@@ -39,7 +39,7 @@ function Login() {
     };
     useEffect(() => {
         if (isLoggedIn) {
-            router.push("/home")
+            router.push("/dashboard")
         }
     }, [])
 
