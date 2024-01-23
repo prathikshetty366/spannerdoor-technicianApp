@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AppLayout } from "../../component/appLayout/Layout";
 import User from "../../component/user/User";
 import styles from "./home.module.scss"
 import { UserDetailsCompletion } from "../../component/user/UserDetailsCompletion";
 import Vehicle from "../../component/Vehicle/Vehicle";
 import { VehicleDetailsCompletion } from "../../component/Vehicle/VehicleDatailsPreview";
+import { useRouter } from "next/router";
 
 function Home() {
+    const isLoggedIn = localStorage.getItem("isLoggedIn")
+    const router=useRouter()
     const [userDetails, setUserDetails] = useState({
         data: {},
         completed: false,
@@ -47,6 +50,11 @@ function Home() {
             completed: false,
         });
     };
+    useEffect(() => {
+        if (!isLoggedIn) {
+            router.push("/")
+        }
+    }, [])
 
     return (
         <AppLayout isLoggedIn={true}>
@@ -57,7 +65,7 @@ function Home() {
                         {!userDetails.completed && !vehicleDetails.completed && (
                             <User submitUser={handleUserDataSubmission} selectedOwnerData={selectedOwnerData} />
                         )}
-                           {!userDetails.completed && vehicleDetails.completed && (
+                        {!userDetails.completed && vehicleDetails.completed && (
                             <User submitUser={handleUserDataSubmission} selectedOwnerData={selectedOwnerData} />
                         )}
                         {userDetails.completed && !vehicleDetails.completed && (

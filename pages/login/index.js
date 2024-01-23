@@ -19,6 +19,7 @@ function Login() {
     const handleLogin = () => {
         if (username.toLowerCase() === id.toLowerCase() && password.toLowerCase() === secret.toLowerCase()) {
             toast.success("Login successfull");
+            localStorage.setItem("isLoggedIn",true)
             setTimeout(()=>{
                 router.push("/home");
             },2000)
