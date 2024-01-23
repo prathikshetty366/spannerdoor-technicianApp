@@ -4,6 +4,10 @@ import { useRouter } from "next/router";
 
 export const AppLayout = ({ children,isLoggedIn}) => {
     const router=useRouter()
+    const handleLogout=()=>{
+        localStorage.setItem("isLoggedIn","")
+        router.push("/")
+    }
     return (
         <div className={styles.layoutWrapper}>
             <div className={styles.navbar}>
@@ -17,6 +21,7 @@ export const AppLayout = ({ children,isLoggedIn}) => {
                     style={{marginLeft:!isLoggedIn?"0":"63px"}}
                     onClick={()=>{router.push("/home")}}
                     />
+                    <div className={styles.logout} onClick={handleLogout}>LOGOUT</div>
                 </div>
                 <div className={styles.navsubheader}></div>
             </div>

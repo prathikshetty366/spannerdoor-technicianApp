@@ -2,7 +2,7 @@ import { AppLayout } from "../../component/appLayout/Layout"
 import styles from "./Login.module.scss"
 import Button from "../../component/Button/Button"
 import Image from "next/image"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
@@ -14,6 +14,8 @@ function Login() {
     const secret = "1234"
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const isLoggedIn = localStorage.getItem("isLoggedIn")
+
 
 
     const handleLogin = () => {
@@ -35,7 +37,11 @@ function Login() {
             handleLogin();
         }
     };
-
+    useEffect(() => {
+        if (isLoggedIn) {
+            router.push("/home")
+        }
+    }, [])
 
     return (
         <AppLayout isLoggedIn={false}>

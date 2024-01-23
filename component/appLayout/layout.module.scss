@@ -9,12 +9,23 @@
             height: 131px;
             background: #0061BB;
             display: flex;
-            // justify-content: center;
+            justify-content: space-between;
             align-items: center;
 
             .logo {
                 margin-left: 63px;
                 cursor: pointer;
+            }
+
+            .logout {
+                color: #FFF;
+                font-family: 'Inter';
+                font-size: 24px;
+                font-style: normal;
+                font-weight: 800;
+                line-height: normal;
+                cursor: pointer;
+                margin-right: 63px;
             }
         }
 
