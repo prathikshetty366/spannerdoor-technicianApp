@@ -23,7 +23,7 @@ function Login() {
             toast.success("Login successfull");
             localStorage.setItem("isLoggedIn",true)
             setTimeout(()=>{
-                router.push("/home");
+                router.push("/dashboard");
             },2000)
 
         } else {

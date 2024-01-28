@@ -1,0 +1,52 @@
+.AddOnsContainer {
+    width: 100%;
+    h2 {
+        color: #000;
+        font-family: 'Inter';
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 800;
+        line-height: normal;
+
+    }
+
+    .addonItem {
+        border-radius: 20px;
+        border: 1px solid #C5BDBD;
+        background: #FFF;
+        height: 69px;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        margin-bottom: 20px;
+        align-items: center;
+        font-family: 'Inter';
+        .title{
+            margin-left: 30px;
+        }
+
+        .btn {
+            width: 119px;
+            height: 59px;
+            border-radius: 20px;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 500;
+            border: 3px solid #074D80;
+            color: #074D80;
+            background: #FFF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 30px;
+            cursor: pointer;
+            &.selected {
+                background: #2AC12F;
+                color: #FFF;
+                border: none;
+
+            }
+        }
+
+    }
+}

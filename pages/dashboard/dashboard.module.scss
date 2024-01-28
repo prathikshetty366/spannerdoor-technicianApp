@@ -1,0 +1,137 @@
+.quickLinks {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-top: 43px;
+    flex-direction: column;
+
+    .quickLinksWrapper {
+        width: 96%;
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+
+        .Item,
+        .ItemActive {
+            width: 232px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+
+            span {
+                color: #074D80;
+                font-family: 'Inter';
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 800;
+                line-height: normal;
+            }
+        }
+
+        .ItemActive {
+            border-bottom: 3px solid #074D80;
+        }
+    }
+
+    .orderFilter {
+        display: flex;
+        flex-direction: row;
+        gap: 30px;
+        margin-top: 39px;
+        justify-content: flex-start;
+        width: 96%;
+
+        .filterItem {
+            border-radius: 20px;
+            border: 3px solid #0A7AE2;
+            background: #FFF;
+            width: 276px;
+            height: 71px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "Inter";
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 800;
+            line-height: normal;
+            cursor: pointer;
+        }
+
+        .todayOrder {
+            border-color: #0A7AE2;
+            color: #074D80;
+        }
+
+        .todayDelivery {
+            border-color: #FF7A00;
+            color: #FF7A00;
+        }
+
+        .delayed {
+            border-color: #FF2E00;
+            color: #E20A0A;
+        }
+    }
+
+    .breaker {
+        width: 96%;
+        height: 1px;
+        background: #D6D6D6;
+        margin-top: 40px;
+    }
+
+    .searchAndBooking {
+        width: 96%;
+        margin-top: 33px;
+
+        .search {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+
+            input {
+                width: 557px;
+                height: 63px;
+                margin: 10px 0px 10px 0px;
+                color: black;
+                font-family: 'Inter';
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                background-color: transparent;
+                outline: none;
+                text-transform: uppercase;
+                border-radius: 10px;
+                border: 1px solid #BCBCBC;
+                background: #FFF;
+                -webkit-background-clip: text;
+                padding-left: 20px;
+                -webkit-text-fill-color: black;
+
+                &::placeholder {
+                    opacity: 0.3;
+                    color: #202121;
+                    font-size: 16px;
+                }
+
+                &:focus {
+                    color: black;
+                    background-color: transparent !important;
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: black;
+                    // Set the text color to white when focused
+                }
+            }
+
+            .buttonWrapper {
+                // width: 256px;
+            }
+        }
+    }
+
+}

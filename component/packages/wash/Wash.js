@@ -1,17 +1,31 @@
 import React, { useState } from 'react';
 import styles from './wash.module.scss';
 import CustomerVoice from '../../customerVoice/CustomerVoice';
-import Image from 'next/image';
+import FileUploader from '../../FileUploader/FileUploader';
 import Button from "../../Button/Button"
-function Wash({submitService}) {
+function Wash({ submitService }) {
     const [rows, setRows] = useState([
         { id: 1, type: 'customerVoice', text: '', priority: 'normal' },
     ]);
+    const [selectedFiles, setSelectedFiles] = useState([]);
+    const [assignedTechnician,setAssignedTechnician]=useState()
 
     const handleUpdateRows = (updatedRows) => {
         setRows(updatedRows);
     };
-    
+
+    const handleFilesSelect = (files) => {
+        setSelectedFiles(files)
+    };
+
+    const handleWashSubmit=()=>{
+        const washData={
+            rows,
+            selectedFiles,
+            assignedTechnician
+        }
+        submitService(washData)
+    }
 
     return (
         <div className={styles.washContainer}>
@@ -22,26 +36,22 @@ function Wash({submitService}) {
                     <div>200 RS</div>
                 </div>
                 <div className={styles.customerVoiceWrapper}>
-                <CustomerVoice initialRows={rows} onUpdate={handleUpdateRows} />
+                    <CustomerVoice initialRows={rows} onUpdate={handleUpdateRows} />
                 </div>
             </div>
-            <div className={styles.serviceImage}>
-                <div className={styles.beforeService}>Before Service</div>
-                <div className={styles.uploadbtn}>
-                    <Image
-                        src="/assets/wash/plus.png"
-                        width={32}
-                        height={40}
-                        alt='upload'
-                    />
-                </div>
-            </div>
+            <FileUploader title="Before Service" label="Upload Images" onFilesSelect={handleFilesSelect} />
             <div className={styles.technicianAssign}>
-                <div className={styles.text}>ASSIGN TECHNICIAN</div>
+                <div className={styles.text}>
+                    <label>
+                    {/* ASSIGN TECHNICIAN */}
+                    <input placeholder='Assign  technician'
+                    onChange={(e)=>setAssignedTechnician(e.target.value)}/>
+                    </label>
+                </div>
                 <div className={styles.btnWrapper}>
-                <Button
-                text='Confirm Booking'
-                onClick={()=>submitService(rows)}/>
+                    <Button
+                        text='Confirm Booking'
+                        onClick={handleWashSubmit} />
                 </div>
             </div>
         </div>

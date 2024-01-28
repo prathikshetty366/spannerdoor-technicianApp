@@ -1,9 +1,10 @@
 import { useState } from "react"
 import styles from "./service.module.scss"
 import Wash from "../packages/wash/Wash"
+import QuickSupport from "../packages/QuickSupport/QuickSupport"
 
 function Service({submitService}) {
-    const [selectedServiceOption, setSelectedServiceOption] = useState(2)
+    const [selectedServiceOption, setSelectedServiceOption] = useState(3)
     return (
         <div className={styles.service}>
             <div className={styles.header}>
@@ -21,6 +22,9 @@ function Service({submitService}) {
             </div>
             {selectedServiceOption===3&&(
                 <Wash submitService={submitService}/>
+            )}
+            {selectedServiceOption===1&&(
+                <QuickSupport submitService={submitService}/>
             )}
         </div>
 

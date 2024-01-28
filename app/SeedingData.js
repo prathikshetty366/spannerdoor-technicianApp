@@ -69,3 +69,69 @@ export const vehicleDummyData=[{
     make: "BAJAJ",
     model:"PULSAR"
 }]
+
+
+export const quickSupport=[
+    {
+        id:1,
+        name:"Break"
+    },
+    {
+        id:2,
+        name:"Oil"
+    },
+    {
+        id:3,
+        name:"TYRE"
+    },
+    {
+        id:4,
+        name:"Electrical check"
+    },
+    {
+        id:5,
+        name:"Control cable"
+    },
+    {
+        id:6,
+        name:"Chain and Lube"
+    },
+    {
+        id:7,
+        name:"Sensors"
+    },
+    {
+        id:8,
+        name:"Lights"
+    },
+    {
+        id:9,
+        name:"Fuel Line"
+    },
+    {
+        id:10,
+        name:"Battery"
+    }
+]
+
+
+export const addOns=[
+
+    {
+        id:1,
+        name:"NORMAL WASH + POLISH"
+    },
+    {
+        id:2,
+        name:"RAIN REPELLENT"
+    },
+    {
+        id:3,
+        name:"RAT X"
+    },
+    {
+        id:4,
+        name:"INSURANCE"
+    }
+
+]

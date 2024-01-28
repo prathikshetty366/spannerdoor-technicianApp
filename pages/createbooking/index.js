@@ -87,22 +87,19 @@ function CreateBooking() {
                     <h2 className={styles.header}>CREATE A NEW BIKE SERVICE BOOKING</h2>
                     <div className={styles.Wrapper}>
                         {/* User Component */}
-                        {!userDetails.completed && !vehicleDetails.completed && !serviceDetails.completed&&(
+                  {!userDetails.completed && !vehicleDetails.completed && !serviceDetails.completed&&(
                             <User submitUser={handleUserDataSubmission} selectedOwnerData={selectedOwnerData} />
                         )}
 
-                        {/* UserDetailsCompletion Component */}
                         {userDetails.completed && !vehicleDetails.completed &&  !serviceDetails.completed&&(
                             <UserDetailsCompletion handleUserEditFromPreview={handleUserEditFromPreview} />
                         )}
 
-                        {/* Vehicle Component */}
                         {userDetails.completed && !vehicleDetails.completed && !serviceDetails.completed&& (
                             <Vehicle submitVehicle={handleVehicleDataSubmission} selectedVehicleData={vehicleData} />
                         )}
 
 
-                        {/* Both UserDetailsCompletion and VehicleDetailsCompletion Components */}
                         {userDetails.completed && vehicleDetails.completed && !serviceDetails.completed && (
                             <>
                                 <UserDetailsCompletion handleUserEditFromPreview={handleUserEditFromPreview} />
@@ -116,11 +113,11 @@ function CreateBooking() {
                                 <ServiceDetailsCompletion handleServiceEditFromPreview={handleServiceEdit} />
 
                             </>
-                        )}
+                        )} 
                         {/* Service Component */}
                         {userDetails.completed && vehicleDetails.completed && !serviceDetails.completed && (
                             <Service submitService={handleServiceDataSubmission} selectedServiceData={serviceData} />
-                        )}
+                      )} 
 
                     </div>
                 </div>
