@@ -27,7 +27,6 @@ function Service({submitService}) {
                 <QuickSupport submitService={submitService}/>
             )}
         </div>
-
     )
 
 }

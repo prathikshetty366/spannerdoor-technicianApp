@@ -87,7 +87,7 @@ function CreateBooking() {
                     <h2 className={styles.header}>CREATE A NEW BIKE SERVICE BOOKING</h2>
                     <div className={styles.Wrapper}>
                         {/* User Component */}
-                  {!userDetails.completed && !vehicleDetails.completed && !serviceDetails.completed&&(
+                  {!userDetails.completed &&(
                             <User submitUser={handleUserDataSubmission} selectedOwnerData={selectedOwnerData} />
                         )}
 
@@ -95,7 +95,7 @@ function CreateBooking() {
                             <UserDetailsCompletion handleUserEditFromPreview={handleUserEditFromPreview} />
                         )}
 
-                        {userDetails.completed && !vehicleDetails.completed && !serviceDetails.completed&& (
+                        {userDetails.completed && !vehicleDetails.completed && (
                             <Vehicle submitVehicle={handleVehicleDataSubmission} selectedVehicleData={vehicleData} />
                         )}
 
