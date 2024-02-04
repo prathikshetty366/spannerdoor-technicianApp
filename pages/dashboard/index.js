@@ -14,7 +14,7 @@ function Dashboard() {
         router.push("/createbooking")
     }
     return (
-        <AppLayout>
+        <AppLayout isLoggedIn={true}>
             <PendingAmount amount={pendingAmount} date="12/01/24" />
             <div className={styles.quickLinks}>
                 <div className={styles.quickLinksWrapper}>
