@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import styles from './user.module.scss';
-import { ownershipData } from '../../app/SeedingData';
 import Button from '../Button/Button';
+import { useDispatch, useSelector } from "react-redux";
+import * as UserActions from "@/app/store/actions"
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 function User({ submitUser, selectedOwnerData }) {
+    const dispatch = useDispatch()
+    const User = useSelector((state) => state.User)
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResult, setSearchResult] = useState([]);
     const [needUser, setNeedUser] = useState(false)
@@ -11,11 +16,16 @@ function User({ submitUser, selectedOwnerData }) {
         name: '',
         email: '',
         pincode: '',
-        contact: '',
-        location: '',
+        PhoneNumber: '',
+        licence: '',
+        gst: '',
+        address: ''
+
     });
     const [selectedOwner, setSelectedOwner] = useState({})
+    const [editUser, setEditUser] = useState(false)
     const handleSearch = (event) => {
+
         setSelectedOwner({})
         const searchTerm = event.target.value;
         if (searchTerm === '') {
@@ -23,17 +33,39 @@ function User({ submitUser, selectedOwnerData }) {
             setSearchResult([]);
         } else {
             setSearchTerm(searchTerm);
-
-            // Filter ownershipData based on the search term
-            const filteredResult = ownershipData.filter((owner) =>
-                Object.values(owner).some(
-                    (value) => value.toString().toLowerCase().includes(searchTerm.toLowerCase())
-                )
-            );
-            setSearchResult(filteredResult);
+            dispatch(UserActions.fetchCustomerDetails(searchTerm))
         }
     };
-
+    useEffect(() => {
+        if (User && User.getCustomerSuccess) {
+            setSearchResult(User.customerDetails);
+            dispatch(UserActions.fetchCustomerDetailsInit())
+        }
+        if (User.updateCustomersuccess) {
+            setSelectedOwner(User.updatedCustomerDetails)
+            setNeedUser(false)
+            toast.success("successfully updated customer details")
+            dispatch(UserActions.updateCustomerInit())
+            setEditUser(false)
+        }
+        if (User.updateCustomerFailure && User.error.userExist) {
+            toast.error(User.error.error)
+            dispatch(UserActions.updateCustomerInit())
+            setEditUser(false)
+        }
+        if (User && User.createUserSuccess) {
+            toast.success("Successfully created new user.")
+            setSelectedOwner(User.newUser)
+            setNeedUser(false)
+            dispatch(UserActions.createUserInit());
+        }
+        if (User && User.createUserFailure) {
+            toast.error(User.error.error)
+            // setNeedUser(false)
+            dispatch(UserActions.createUserInit());
+        }
+    }, [User])
+    console.log(selectedOwner)
     const handleInputChange = (event, field) => {
         // Update the corresponding field in userData state
         setUserData({
@@ -45,18 +77,41 @@ function User({ submitUser, selectedOwnerData }) {
 
     const handleCreateUserSubmit = () => {
         // Validate that all fields in userData have values
-        const areAllFieldsFilled = Object.values(userData).every(value => value.trim() !== '');
-
-        if (areAllFieldsFilled) {
-            setNeedUser(false);
-            setSelectedOwner(userData);
-        } else {
-            // Display an error message or take appropriate action for incomplete fields
-            alert("Please fill in all fields.");
+        const payload = {
+            customerData: {
+                name: userData.name,
+                email: userData.email,
+                pincode: userData.pincode,
+                phoneNumber: userData.phoneNumber,
+                licence: userData.licence,
+                gst: userData.gst,
+                address: userData.address,
+                notifications: "SMS, Email"
+            }
         }
+        dispatch(UserActions.createUser(payload))
     };
 
+    const handleEditUserSubmit = () => {
+        // setSelectedOwner(userData)
+        // setNeedUser(false)
+        const payload = {
+            customerId: userData.id,
+            userDetails: {
+                name: userData.name,
+                email: userData.email,
+                pincode: userData.pincode,
+                phoneNumber: userData.phoneNumber,
+                licence: userData.licence,
+                gst: userData.gst,
+                address: userData.address
+            }
+        }
+        dispatch(UserActions.updateCustomer(payload))
+    }
+
     const handleEditUserDetails = () => {
+        setEditUser(true)
         setUserData({ ...selectedOwner })
         setNeedUser(true)
     }
@@ -77,6 +132,8 @@ function User({ submitUser, selectedOwnerData }) {
             setSelectedOwner(selectedOwnerData);
         }
     }, [selectedOwnerData]);
+
+
 
     return (
         <div className={styles.userContainer}>
@@ -105,22 +162,24 @@ function User({ submitUser, selectedOwnerData }) {
                             {Object.keys(selectedOwner).length > 0 ? (
                                 <div className={styles.ownershipDetails} onClick={handleEditUserDetails}>
                                     <h2>{selectedOwner.name}</h2>
-                                    <h2>{selectedOwner.contact}</h2>
+                                    <h2>{selectedOwner.phoneNumber}</h2>
                                     <h2>{selectedOwner.email}</h2>
-                                    <h2>{selectedOwner.location}</h2>
+                                    <h2>{selectedOwner.pincode}</h2>
                                 </div>
                             ) : (
-                                searchResult.map((result, index) => (
-                                    <div className={styles.ownershipDetails} key={index} onClick={() => {
-                                        setNeedUser(false);
-                                        setSelectedOwner(result);
-                                    }}>
-                                        <h2>{result.name}</h2>
-                                        <h2>{result.contact}</h2>
-                                        <h2>{result.email}</h2>
-                                        <h2>{result.location}</h2>
-                                    </div>
-                                ))
+                                    // <div>hello
+                                    // </div>
+                                    searchResult && searchResult?.map((result, index) => (
+                                        <div className={styles.ownershipDetails} key={index} onClick={() => {
+                                            setNeedUser(false);
+                                            setSelectedOwner(result);
+                                        }}>
+                                            <h2>{result.name}</h2>
+                                            <h2>{result.phoneNumber}</h2>
+                                            <h2>{result.email}</h2>
+                                            <h2>{result.pincode}</h2>
+                                        </div>
+                                    ))
                             )}
                             <div className={styles.buttonWrapper}>
 
@@ -128,8 +187,8 @@ function User({ submitUser, selectedOwnerData }) {
                                     !Object.keys(selectedOwner).length &&
                                     (<Button
                                         styles={!searchResult.length ? { marginTop: "30px" } : {}}
-                                        text={searchResult.length > 0 ? "ADD ANOTHER" : "CREATE NEW"}
-                                        onClick={() => setNeedUser(true)}
+                                        text={searchResult?.length > 0 ? "ADD ANOTHER" : "CREATE NEW"}
+                                        onClick={() => { setNeedUser(true); setUserData({}) }}
                                     />)
                                 }
                             </div>
@@ -140,7 +199,7 @@ function User({ submitUser, selectedOwnerData }) {
 
                 {needUser && (
                     <div className={styles.createUserContainer}>
-                        <h2>CREATE NEW USER</h2>
+                        <h2>{editUser ? "Edit User" : "CREATE NEW USER"}</h2>
                         <form className={styles.userForm}>
                             <div className={styles.formRow}>
                                 <input
@@ -164,24 +223,41 @@ function User({ submitUser, selectedOwnerData }) {
                                     onChange={(e) => handleInputChange(e, 'pincode')}
                                 />
                                 <input
-                                    type="text"
-                                    placeholder="Contact"
-                                    value={userData.contact}
-                                    onChange={(e) => handleInputChange(e, 'contact')}
+                                    placeholder="PhoneNumber"
+                                    value={userData.phoneNumber}
+                                    onChange={(e) => handleInputChange(e, 'phoneNumber')}
+                                    type="number"
+                                    maxLength={10}
+
                                 />
                             </div>
                             <div className={styles.formRow}>
                                 <input
                                     type="text"
-                                    placeholder="Location"
-                                    value={userData.location}
-                                    onChange={(e) => handleInputChange(e, 'location')}
+                                    placeholder="licence"
+                                    value={userData.licence}
+                                    onChange={(e) => handleInputChange(e, 'licence')}
+                                />
+                                <input
+                                    type="text"
+                                    placeholder="gst"
+                                    value={userData.gst}
+                                    onChange={(e) => handleInputChange(e, 'gst')}
+                                />
+
+                            </div>
+                            <div className={styles.formRow}>
+                                <input
+                                    type="text"
+                                    placeholder="address"
+                                    value={userData.address}
+                                    onChange={(e) => handleInputChange(e, 'address')}
                                 />
                             </div>
                             <div className={styles.buttonWrapper}>
                                 <Button
                                     text="SAVE"
-                                    onClick={handleCreateUserSubmit} />
+                                    onClick={editUser ? handleEditUserSubmit : handleCreateUserSubmit} />
                             </div>
                         </form>
                     </div>
@@ -200,6 +276,7 @@ function User({ submitUser, selectedOwnerData }) {
 
                 </div>
             </div>
+            <ToastContainer />
         </div>
     );
 }
